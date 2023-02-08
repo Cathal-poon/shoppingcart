@@ -18,12 +18,12 @@ class ShoppingCart(IShoppingCart):
         # adds new item to or update existing item in the shopping cart
         self._contents.append((item_type, number))
    
-    def print_receipt(self):
+    def print_receipt(self, format: str = "{item} - {quantity} - {price}"):
         total = 0
         for item, quantity in self._contents:
             price = self.pricer.get_price(item)
             total += quantity * price
-            print(f"{item} - {quantity} - {price}")
+            print(eval(f'f"{format}"'))
         print(f"Total - {total}")
 
 class ShoppingCartCreator(ABC):
