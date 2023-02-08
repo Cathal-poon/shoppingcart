@@ -16,17 +16,14 @@ class ShoppingCart(IShoppingCart):
     
     def add_item(self, item_type: str, number: int):
         # adds new item to or update existing item in the shopping cart
-        if item_type not in self._contents:
-            self._contents[item_type] = number
-        else:
-            self._contents[item_type] = self._contents[item_type] + number
-
-    def print_receipt(self):
+        self._contents.append((item_type, number))
+   
+    def print_receipt(self, format: str = "{item} - {quantity} - {price}"):
         total = 0
-        for key, value in self._contents.items():
-            price = self.pricer.get_price(key)
-            total += value * price
-            print(f"{key} - {value} - {price}")
+        for item, quantity in self._contents:
+            price = self.pricer.get_price(item)
+            total += quantity * price
+            print(eval(f'f"{format}"'))
         print(f"Total - {total}")
 
 class ShoppingCartCreator(ABC):
