@@ -1,3 +1,5 @@
+Python Solution
+
 Work on shooping_cart.py
 Don't change / modify the interface
 
@@ -6,7 +8,7 @@ Don't change / modify the interface
 - [x] Have receipt print in order 
 - [x] Allow for different formatting options
 - [ ] Change tests and test suite to be more flexible
-- [ ] Have something extra
+- [x] Have something extra
 
 ### Total
 Keep a running track
@@ -24,3 +26,6 @@ Need to change code to allow for selection of printing together or inorder
 
 I only added tests and didnt remove any or modify any
 So changing tests didn't make sense in this situation.
+
+### Extra Stuff
+I made it so you can choose to print items as the come in or to group the same items together before printing
