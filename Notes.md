@@ -19,3 +19,8 @@ Use a Queue or a List <br>
 
 ### Allow for different formatting
 Allow an fString to be passed in as an argument if desired
+
+Need to change code to allow for selection of printing together or inorder
+
+I only added tests and didnt remove any or modify any
+So changing tests didn't make sense in this situation.
