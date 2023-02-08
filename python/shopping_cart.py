@@ -11,8 +11,9 @@ class ShoppingCart(IShoppingCart):
     """
     def __init__(self, pricer: Pricer):
         self.pricer = pricer
-        self._contents: Dict[str,int] = {}
-
+        #self._contents: Dict[str,int] = {}
+        self._contents: list[tuple[str, int]] = []
+    
     def add_item(self, item_type: str, number: int):
         # adds new item to or update existing item in the shopping cart
         if item_type not in self._contents:
