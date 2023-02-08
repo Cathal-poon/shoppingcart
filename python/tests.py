@@ -1,6 +1,6 @@
 import unittest
 
-from shopping_cart import ShoppingCartConcreteCreator
+from shopping_cart import ShoppingCartConcreteCreator, Mode
 from test_utils import Capturing
 
 class ShoppingCartTest(unittest.TestCase):
@@ -66,5 +66,20 @@ class ShoppingCartTest(unittest.TestCase):
         self.assertEqual("100 - apple - 2", output[4])
         self.assertEqual("200 - banana - 2", output[5])
         self.assertEqual("Total - 2200", output[6])
+    
+    def test_selection(self):
+        sc = ShoppingCartConcreteCreator().operation()
+        sc.add_item("apple", 2)
+        sc.add_item("banana", 5)
+        sc.add_item("pear", 5)
+        sc.add_item("apple", 4)
+        sc.add_item("apple", 2)
+        sc.add_item("banana", 2)
+        with Capturing() as output:
+            sc.print_receipt("{price} - {item} - {quantity}", Mode.GROUPED)
+        self.assertEqual("100 - apple - 8", output[0])
+        self.assertEqual("200 - banana - 7", output[1])
+        self.assertEqual("0 - pear - 5", output[2])
+        self.assertEqual("Total - 2200", output[3])
     
 unittest.main(exit=False)
