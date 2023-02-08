@@ -4,6 +4,14 @@ from typing import Dict
 from shopping_cart_interface import IShoppingCart
 from pricer import Pricer
 
+from enum import Enum, auto
+
+"""
+    Enum to select whether you want to group items together or print them in order
+"""
+class Mode(Enum):
+    GROUPED = auto()
+    INORDER = auto()
 
 class ShoppingCart(IShoppingCart):
     """
@@ -18,12 +26,29 @@ class ShoppingCart(IShoppingCart):
         # adds new item to or update existing item in the shopping cart
         self._contents.append((item_type, number))
    
-    def print_receipt(self, format: str = "{item} - {quantity} - {price}"):
+    def _arr_to_dict(self, arr: list[tuple[str, int]], mydict: dict[str, int] = {}):
+        for key, value in arr:
+            mydict.setdefault(key, 0)
+            mydict[key] += value
+        return mydict
+    
+    def print_receipt(self, format: str = "{item} - {quantity} - {price}", mode: Mode = Mode.INORDER):
         total = 0
-        for item, quantity in self._contents:
-            price = self.pricer.get_price(item)
-            total += quantity * price
-            print(eval(f'f"{format}"'))
+        # Note the minor repetiton
+        match mode:
+            case Mode.GROUPED:
+                myDict = {}
+                self._arr_to_dict(self._contents, myDict)
+                for item, quantity in myDict.items():
+                    price = self.pricer.get_price(item)
+                    total += quantity * price
+                    print(eval(f'f"{format}"'))       
+            case Mode.INORDER:
+                for item, quantity in self._contents:
+                    price = self.pricer.get_price(item)
+                    total += quantity * price
+                    print(eval(f'f"{format}"'))
+        
         print(f"Total - {total}")
 
 class ShoppingCartCreator(ABC):
