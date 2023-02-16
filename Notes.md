@@ -1,6 +1,6 @@
 Python Solution
 
-Work on shooping_cart.py
+Work on shopping_cart.py
 Don't change / modify the interface
 
 ## Tasks
