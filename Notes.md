@@ -24,6 +24,7 @@ Allow an fString to be passed in as an argument if desired
 
 Need to change code to allow for selection of printing together or inorder
 
+### Tests
 I only added tests and didnt remove any or modify any
 So changing tests didn't make sense in this situation.
 
